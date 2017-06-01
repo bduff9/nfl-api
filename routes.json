@@ -1,0 +1,3 @@
+{
+  "/2017/export?TYPE=nflSchedule&JSON=1&W=:week": "/export/:week"
+}
