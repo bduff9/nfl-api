@@ -4,13 +4,15 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node -e \"require('./index').updateJSON({})\"",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "download": "node -e \"require('./index').downloadJSON({})\"",
+    "server": "node server",
+    "update": "node -e \"require('./index').updateJSON({})\""
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "json-server": "0.10.1",
     "jsonfile": "^3.0.0",
     "request": "^2.81.0",
     "request-promise": "^4.2.1"

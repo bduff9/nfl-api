@@ -58,4 +58,4 @@ typings/
 .env
 
 # nfl-api files
-test-data.json
+db.json

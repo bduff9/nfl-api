@@ -2,7 +2,11 @@ JSON Server: https://github.com/typicode/json-server
 
 ~Sample JSON~
 {
-  "year": 2017,
+  "metadata": {
+    "year": 2017,
+    "dateDownloaded": ...,
+    "dateUpdate": ...
+  },
   "export": [
     {
       "W": 1,
@@ -37,10 +41,8 @@ Finally, scan any games for status P and kickoff in the past
 - If found, set their data to over
 
 ~TODO~
-1) Write function to download an entire year of JSON and save it in above format
-2) Write function to read/write data to file
-3) Write function to find games with status P and kickoff in the past
-4) Write npm script to handle CLI
-5) Write middleware
-6) Recalculate kickoffs based on CLI parm/input
-7) Remove files from nfl-meteor
+1) Write function to find games with status P and kickoff in the past
+2) Write npm script to handle CLI
+3) Write middleware
+4) Recalculate kickoffs based on CLI parm/input
+5) Remove files from nfl-meteor

@@ -1,7 +1,7 @@
 {
-  "port": 3003,
-  "watch": true,
-  "read-only": true,
-  "routes": "routes.json",
-  "id": "W"
+	"port": 3003,
+	"watch": true,
+	"read-only": true,
+	"routes": "routes.json",
+	"id": "W"
 }
