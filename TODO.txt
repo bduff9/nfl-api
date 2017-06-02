@@ -46,3 +46,4 @@ Finally, scan any games for status P and kickoff in the past
 3) Write middleware
 4) Recalculate kickoffs based on CLI parm/input
 5) Remove files from nfl-meteor
+6) Linting
