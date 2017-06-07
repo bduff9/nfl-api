@@ -2,16 +2,21 @@
   "name": "nfl-api",
   "version": "1.0.0",
   "description": "",
+  "repository": {
+   "type": "git",
+    "url": "git://github.com/bduff9/nfl-api.git"
+  },
   "main": "index.js",
   "scripts": {
-    "download": "node -e \"require('./index').downloadJSON({})\"",
+    "download": "node -e \"require('./index').downloadJSON()\"",
     "server": "node server",
-    "update": "node -e \"require('./index').updateJSON({})\""
+    "update": "node -e \"require('./index').updateJSON()\""
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "commander": "2.9.0",
     "json-server": "0.10.1",
     "jsonfile": "^3.0.0",
     "request": "^2.81.0",

@@ -5,19 +5,21 @@ const server = jsonServer.create();
 const router = jsonServer.router('db.json');
 const middlewares = jsonServer.defaults();
 
+const { updateJSON } = require('./update-data');
+
 /**
  * Server file for json-server
  */
 
 server.use(middlewares);
-server.get('/:year/export', (request, response) => {
-	const { year } = request.params,
-			{ W } = request.query;
-	//TODO when request comes in, check if year requested exists
-	//TODO if not, call download
-	//TODO update data by setting game statuses for P games with kickoffs in the past
-	response.redirect(`/export?W=${W}`);
+server.all('/:year/export', async function (request, response, next) {
+	const { year } = request.params;
+	updateJSON({ year });
+	next();
 });
+server.use(jsonServer.rewriter({
+	'/:year/export/': '/export?'
+}));
 router.render = (request, response) => {
 	const { data } =  response.locals;
 	if (Array.isArray(data) && data.length === 1) return response.jsonp(data[0]);
