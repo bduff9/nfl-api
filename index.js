@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 'use strict';
 
-const cli = require('cli');
+const program = require('commander');
 
 const { downloadJSON, updateJSON } = require('./update-data');
 
@@ -9,14 +9,31 @@ const { downloadJSON, updateJSON } = require('./update-data');
  * CLI functionality
  */
 
-cli.parse({
-	download: ['d', 'Download only?', 'on'],
-	kickoffs: ['k', 'How far apart to make the kickoffs (in minutes)', 'int'],
-	year: ['y', 'The year to download', 'int']
-});
+const downloadOnly = async function downloadOnly (options) {
+	const { kickoffs, year } = options,
+			apiOptions = { gameSpacingInMin: kickoffs, year };
+	await downloadJSON(apiOptions);
+};
 
-if (cli.download) {
-	await downloadJSON({ gameSpacingInMin: cli.kickoffs, year: cli.year });
-} else {
-	await updateJSON({ gameSpacingInMin: cli.kickoffs, year: cli.year });
-}
+const fullUpdate = async function fullUpdate (options) {
+	const { kickoffs, year } = options,
+			apiOptions = { gameSpacingInMin: kickoffs, year };
+	await updateJSON(apiOptions);
+};
+
+program
+	.version('0.0.1')
+	.option('-k, --kickoffs [minutes]', 'Separate kickoffs manually (in minutes)', /^\d+$/)
+	.option('-y, --year [year]', 'Year to get', /^\d\d\d\d$/);
+
+program
+	.command('download')
+	.description('Manually update NFL API (download only)')
+	.action(downloadOnly);
+
+program
+	.command('update')
+	.description('Manually update NFL API')
+	.action(fullUpdate);
+
+program.parse(process.argv);

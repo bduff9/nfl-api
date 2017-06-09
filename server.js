@@ -14,7 +14,8 @@ const { updateJSON } = require('./update-data');
 server.use(middlewares);
 server.all('/:year/export', async function (request, response, next) {
 	const { year } = request.params;
-	updateJSON({ year });
+	await updateJSON({ year });
+	router.db.assign(require('require-uncached')('./db.json')).write();
 	next();
 });
 server.use(jsonServer.rewriter({
