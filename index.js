@@ -16,8 +16,8 @@ const downloadOnly = async function downloadOnly (options) {
 };
 
 const fullUpdate = async function fullUpdate (options) {
-	const { kickoffs, year } = options,
-			apiOptions = { gameSpacingInMin: kickoffs, year };
+	const { kickoffs, year } = options.parent,
+			apiOptions = { gameSpacingInMin: kickoffs, year: year };
 	await updateJSON(apiOptions);
 };
 

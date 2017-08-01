@@ -30,8 +30,8 @@ const downloadJSON = async function downloadJSON ({ gameSpacingInMin = 0, year =
 			const games = json.nflSchedule.matchup,
 					spacingInSec = gameSpacingInMin * 60;
 			games.forEach(game => {
-				game.kickoff = `${currentTS}`;
 				currentTS += spacingInSec;
+				game.kickoff = `${currentTS}`;
 			});
 		}
 		json.W = w;
@@ -45,8 +45,8 @@ const downloadJSON = async function downloadJSON ({ gameSpacingInMin = 0, year =
 
 const getDB = async function getDB (doDownload, { gameSpacingInMin = 0, year = new Date().getFullYear() } = {}) {
   let gameObj = jsonfile.readFileSync(file, { throws: false });
-  if (!doDownload) return gameObj;
-	if (gameObj === null || gameObj.metadata.year !== year) {
+	if (!doDownload) return gameObj;
+	if (gameObj === null || gameObj.metadata.year != year) {
 		await downloadJSON({ gameSpacingInMin, year });
 		gameObj = jsonfile.readFileSync(file, { throws: false });
 	} else {
