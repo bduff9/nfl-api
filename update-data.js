@@ -7,6 +7,7 @@ const file = './db.json';
 
 const LOW_SCORE = 0;
 const HIGH_SCORE = 64;
+const BETWEEN_GAMES_MIN = 60;
 
 /**
  * All functions for nfl-api
@@ -25,6 +26,7 @@ const downloadJSON = async function downloadJSON ({ gameSpacingInMin = 0, year =
 	for (let w = 1; w < 18; w++) {
 		let body = await request.get(apiURL + w);
 		let json = JSON.parse(body);
+		currentTS += (BETWEEN_GAMES_MIN * 60);
 		// Update json here as needed
 		if (gameSpacingInMin > 0) {
 			const games = json.nflSchedule.matchup,
