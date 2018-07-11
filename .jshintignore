@@ -1,0 +1,8 @@
+.git
+node_modules
+public
+.gitignore
+.eslintrc
+.eslintignore
+dist
+**/*.jsx

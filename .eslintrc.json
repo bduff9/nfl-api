@@ -1,0 +1,60 @@
+{
+  "env": {
+    "browser": true,
+    "node": true,
+    "es6": true
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended"
+  ],
+  "parser": "babel-eslint",
+  "parserOptions": {
+    "ecmaFeatures": {
+      "experimentalObjectRestSpread": true,
+      "jsx": true
+    },
+    "ecmaVersion": 7,
+    "sourceType": "module"
+  },
+  "plugins": [
+    "import",
+    "react"
+  ],
+  "settings": {
+    "react": {
+      "version": "^16.0.0"
+    }
+  },
+  "rules": {
+    "indent": [
+      "error",
+      "tab", {
+        "SwitchCase": 1,
+        "VariableDeclarator": 2
+      }
+    ],
+    "linebreak-style": "off",
+    "no-console": "off",
+    "no-constant-condition": "off",
+    "space-before-function-paren": ["error", "always"],
+    "no-unused-vars": [
+      "warn", {
+        "varsIgnorePattern": "UU",
+        "args": "none"
+      }
+    ],
+    "quotes": [
+      "error",
+      "single"
+    ],
+    "react/no-danger": "off",
+    "react/no-find-dom-node": "off",
+    "semi": [
+      "error",
+      "always"
+    ],
+    "import/named": 2,
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }]
+  }
+}
