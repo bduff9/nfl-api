@@ -10,14 +10,16 @@ const { downloadJSON, updateJSON } = require('./update-data');
  */
 
 const downloadOnly = async function downloadOnly (options) {
-	const { kickoffs, year } = options,
-			apiOptions = { gameSpacingInMin: kickoffs, year };
+	const { kickoffs, year } = options;
+	const apiOptions = { gameSpacingInMin: kickoffs, year };
+
 	await downloadJSON(apiOptions);
 };
 
 const fullUpdate = async function fullUpdate (options) {
-	const { kickoffs, year } = options.parent,
-			apiOptions = { gameSpacingInMin: kickoffs, year: year };
+	const { kickoffs, year } = options.parent;
+	const apiOptions = { gameSpacingInMin: kickoffs, year };
+
 	await updateJSON(apiOptions);
 };
 

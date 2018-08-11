@@ -20,26 +20,32 @@ const downloadJSON = async function downloadJSON ({ gameSpacingInMin = 0, year =
 					dateDownloaded: new Date(),
 					dateUpdated: new Date()
 				}
-			},
-			exporter = [],
-			currentTS = Math.floor(new Date().getTime() / 1000);
+			};
+	let exporter = [];
+	let currentTS = Math.floor(new Date().getTime() / 1000);
+
 	for (let w = 1; w < 18; w++) {
 		let body = await request.get(apiURL + w);
 		let json = JSON.parse(body);
+
 		currentTS += (BETWEEN_GAMES_MIN * 60);
+
 		// Update json here as needed
 		if (gameSpacingInMin > 0) {
-			const games = json.nflSchedule.matchup,
-					spacingInSec = gameSpacingInMin * 60;
+			const games = json.nflSchedule.matchup;
+			const spacingInSec = gameSpacingInMin * 60;
+
 			games.forEach(game => {
 				currentTS += spacingInSec;
 				game.kickoff = `${currentTS}`;
 			});
 		}
+
 		json.W = w;
 		exporter.push(json);
 		console.log(`Week ${w} fetched`);
 	}
+
 	console.log('All weeks fetched!');
 	yearObj.export = exporter;
 	jsonfile.writeFileSync(file, yearObj);
@@ -47,36 +53,43 @@ const downloadJSON = async function downloadJSON ({ gameSpacingInMin = 0, year =
 
 const getDB = async function getDB (doDownload, { gameSpacingInMin = 0, year = new Date().getFullYear() } = {}) {
   let gameObj = jsonfile.readFileSync(file, { throws: false });
+
 	if (!doDownload) return gameObj;
-	if (gameObj === null || gameObj.metadata.year != year) {
+
+	if (gameObj == null || gameObj.metadata == null || gameObj.metadata.year != year) {
 		await downloadJSON({ gameSpacingInMin, year });
+
 		gameObj = jsonfile.readFileSync(file, { throws: false });
 	} else {
 		console.log('Year already up to date!');
 	}
+
 	return gameObj;
 };
 
-const randomScore = function randomScore () {
-	return Math.floor(LOW_SCORE + (Math.random() * HIGH_SCORE));
-};
+const randomScore = () => Math.floor(LOW_SCORE + (Math.random() * HIGH_SCORE));
 
 const updateJSON = async function updateJSON ({ gameSpacingInMin = 0, year = new Date().getFullYear() } = {}) {
-	const gameObj = await getDB(true, { gameSpacingInMin, year }),
-      weeks = gameObj.export;
+	const gameObj = await getDB(true, { gameSpacingInMin, year });
+	const weeks = gameObj.export;
 	let hasUpdated = false;
+
 	weeks.forEach(week => {
-		const games = week.nflSchedule.matchup,
-				currentTS = Math.floor(new Date().getTime() / 1000);
+		const games = week.nflSchedule.matchup;
+		const currentTS = Math.floor(new Date().getTime() / 1000);
+
 		games.forEach(game => {
 			if (game.gameSecondsRemaining > 0 && game.kickoff <= currentTS) {
 				const teams = game.team;
+
 				hasUpdated = true;
 				game.gameSecondsRemaining = 0;
+
 				teams.forEach(team => team.score = randomScore());
 			}
 		});
 	});
+
 	if (hasUpdated) {
 		gameObj.metadata.dateUpdated = new Date();
 		jsonfile.writeFileSync(file, gameObj);
