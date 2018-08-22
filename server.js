@@ -21,7 +21,7 @@ server.all('/:year/export', async function ({ params }, UUresponse, next) {
 });
 
 server.use(jsonServer.rewriter({
-	'/:year/export/': '/export?'
+	'/:year/export\\?*W=:week': '/export?W=:week'
 }));
 
 router.render = (UUrequest, response) => {
