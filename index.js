@@ -3,8 +3,8 @@
 
 const program = require('commander');
 
-const { downloadJSON } = require('./download');
-const { updateJSON } = require('./update');
+const { downloadJSON } = require('./download/download');
+const { updateJSON } = require('./update/update');
 
 /**
  * CLI functionality

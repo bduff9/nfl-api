@@ -2,8 +2,8 @@
 
 const jsonfile = require('jsonfile');
 
-const file = './db.json';
-const { downloadJSON } = require('./download');
+const file = '../db.json';
+const { downloadJSON } = require('../download/download');
 const LOW_SCORE = 0;
 const HIGH_SCORE = 64;
 
@@ -57,5 +57,6 @@ const updateJSON = async function updateJSON ({ kickoffs: gameSpacingInMin = 0, 
 };
 
 module.exports = {
+	randomScore,
 	updateJSON
 };

@@ -5,7 +5,7 @@ const server = jsonServer.create();
 const router = jsonServer.router('db.json');
 const middlewares = jsonServer.defaults();
 
-const { updateJSON } = require('./update');
+const { updateJSON } = require('../update/update');
 
 /**
  * Server file for json-server

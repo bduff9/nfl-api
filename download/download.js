@@ -3,7 +3,7 @@
 const jsonfile = require('jsonfile');
 const request = require('request-promise');
 
-const file = './db.json';
+const file = '../db.json';
 
 const BETWEEN_GAMES_MIN = 60;
 
