@@ -17,7 +17,7 @@
   "dependencies": {
     "commander": "2.9.0",
     "json-server": "0.10.1",
-    "jsonfile": "^3.0.0",
+    "jsonfile": "^4.0.0",
     "request": "^2.81.0",
     "request-promise": "^4.2.1",
     "require-uncached": "1.0.3"
