@@ -10,7 +10,6 @@ const { updateJSON } = require('../update/update');
 /**
  * Server file for json-server
  */
-
 server.use(middlewares);
 server.all('/:year/export', async function ({ params }, UUresponse, next) {
 	const { year } = params;

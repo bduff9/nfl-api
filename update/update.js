@@ -2,10 +2,8 @@
 
 const jsonfile = require('jsonfile');
 
-const file = '../db.json';
-const { downloadJSON } = require('../download/download');
-const LOW_SCORE = 0;
-const HIGH_SCORE = 64;
+const { DB_FILE, HIGH_SCORE, LOW_SCORE } = require('../constants');
+const { downloadJSON, getNowInSeconds } = require('../download/download');
 
 /**
  * Update existing data only
@@ -13,14 +11,14 @@ const HIGH_SCORE = 64;
  * Only downloads data if db is empty
  */
 const getDB = async function getDB (doDownload, { gameSpacingInMin = 0, year = new Date().getFullYear() } = {}) {
-	let gameObj = jsonfile.readFileSync(file, { throws: false });
+	let gameObj = jsonfile.readFileSync(DB_FILE, { throws: false });
 
 	if (!doDownload) return gameObj;
 
 	if (gameObj == null || gameObj.metadata == null || gameObj.metadata.year != year) {
-		await downloadJSON({ gameSpacingInMin, year });
+		await downloadJSON({ kickoffs: gameSpacingInMin, year });
 
-		gameObj = jsonfile.readFileSync(file, { throws: false });
+		gameObj = jsonfile.readFileSync(DB_FILE, { throws: false });
 	} else {
 		console.log('Year already up to date!');
 	}
@@ -36,7 +34,7 @@ const updateJSON = async function updateJSON ({ kickoffs: gameSpacingInMin = 0, 
 
 	gameObj.export.forEach(week => {
 		const games = week.nflSchedule.matchup;
-		const currentTS = Math.floor(new Date().getTime() / 1000);
+		const currentTS = getNowInSeconds();
 
 		games.forEach(game => {
 			if (game.gameSecondsRemaining > 0 && game.kickoff <= currentTS) {
@@ -49,7 +47,7 @@ const updateJSON = async function updateJSON ({ kickoffs: gameSpacingInMin = 0, 
 
 	if (hasUpdated) {
 		gameObj.metadata.dateUpdated = new Date();
-		jsonfile.writeFileSync(file, gameObj);
+		jsonfile.writeFileSync(DB_FILE, gameObj);
 		console.log('Date has been updated!');
 	} else {
 		console.log('Data is already updated!');
