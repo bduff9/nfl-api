@@ -23,7 +23,7 @@
     "require-uncached": "1.0.3"
   },
   "devDependencies": {
-    "babel-eslint": "^8.2.6",
+    "babel-eslint": "8.2.6",
     "eslint": "5.4.0",
     "eslint-plugin-import": "2.14.0"
   }
