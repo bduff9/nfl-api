@@ -9,7 +9,7 @@
   "main": "index.js",
   "scripts": {
     "lint": "eslint \"./*.js\"",
-    "server": "node server",
+    "server": "node ./server/server",
     "test": "jest --coverage --coverageReporters=text-lcov | coveralls"
   },
   "keywords": [],
