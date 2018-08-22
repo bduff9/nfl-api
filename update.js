@@ -30,23 +30,19 @@ const getDB = async function getDB (doDownload, { gameSpacingInMin = 0, year = n
 
 const randomScore = () => Math.floor(LOW_SCORE + (Math.random() * HIGH_SCORE));
 
-const updateJSON = async function updateJSON ({ gameSpacingInMin = 0, year = new Date().getFullYear() } = {}) {
+const updateJSON = async function updateJSON ({ kickoffs: gameSpacingInMin = 0, year = new Date().getFullYear() } = {}) {
 	const gameObj = await getDB(true, { gameSpacingInMin, year });
-	const weeks = gameObj.export;
 	let hasUpdated = false;
 
-	weeks.forEach(week => {
+	gameObj.export.forEach(week => {
 		const games = week.nflSchedule.matchup;
 		const currentTS = Math.floor(new Date().getTime() / 1000);
 
 		games.forEach(game => {
 			if (game.gameSecondsRemaining > 0 && game.kickoff <= currentTS) {
-				const teams = game.team;
-
 				hasUpdated = true;
 				game.gameSecondsRemaining = 0;
-
-				teams.forEach(team => team.score = randomScore());
+				game.team.forEach(team => team.score = randomScore());
 			}
 		});
 	});

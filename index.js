@@ -10,15 +10,11 @@ const { updateJSON } = require('./update');
  * CLI functionality
  */
 const downloadOnly = async function downloadOnly ({ parent }) {
-	const { kickoffs, year } = parent;
-
-	await downloadJSON({ gameSpacingInMin: kickoffs, year });
+	await downloadJSON(parent);
 };
 
 const fullUpdate = async function fullUpdate ({ parent }) {
-	const { kickoffs, year } = parent;
-
-	await updateJSON({ gameSpacingInMin: kickoffs, year });
+	await updateJSON(parent);
 };
 
 program
