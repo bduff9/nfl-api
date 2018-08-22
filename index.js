@@ -3,24 +3,22 @@
 
 const program = require('commander');
 
-const { downloadJSON, updateJSON } = require('./update-data');
+const { downloadJSON } = require('./download');
+const { updateJSON } = require('./update');
 
 /**
  * CLI functionality
  */
+const downloadOnly = async function downloadOnly ({ parent }) {
+	const { kickoffs, year } = parent;
 
-const downloadOnly = async function downloadOnly (options) {
-	const { kickoffs, year } = options;
-	const apiOptions = { gameSpacingInMin: kickoffs, year };
-
-	await downloadJSON(apiOptions);
+	await downloadJSON({ gameSpacingInMin: kickoffs, year });
 };
 
-const fullUpdate = async function fullUpdate (options) {
-	const { kickoffs, year } = options.parent;
-	const apiOptions = { gameSpacingInMin: kickoffs, year };
+const fullUpdate = async function fullUpdate ({ parent }) {
+	const { kickoffs, year } = parent;
 
-	await updateJSON(apiOptions);
+	await updateJSON({ gameSpacingInMin: kickoffs, year });
 };
 
 program

@@ -1,58 +1,19 @@
 'use strict';
 
 const jsonfile = require('jsonfile');
-const request = require('request-promise');
 
 const file = './db.json';
-
+const { downloadJSON } = require('./download');
 const LOW_SCORE = 0;
 const HIGH_SCORE = 64;
-const BETWEEN_GAMES_MIN = 60;
 
 /**
- * All functions for nfl-api
+ * Update existing data only
+ *
+ * Only downloads data if db is empty
  */
-const downloadJSON = async function downloadJSON ({ gameSpacingInMin = 0, year = new Date().getFullYear() } = {}) {
-	const apiURL = `http://www03.myfantasyleague.com/${year}/export?TYPE=nflSchedule&JSON=1&W=`;
-	let yearObj = {
-				metadata: {
-					year,
-					dateDownloaded: new Date(),
-					dateUpdated: new Date()
-				}
-			};
-	let exporter = [];
-	let currentTS = Math.floor(new Date().getTime() / 1000);
-
-	for (let w = 1; w < 18; w++) {
-		let body = await request.get(apiURL + w);
-		let json = JSON.parse(body);
-
-		currentTS += (BETWEEN_GAMES_MIN * 60);
-
-		// Update json here as needed
-		if (gameSpacingInMin > 0) {
-			const games = json.nflSchedule.matchup;
-			const spacingInSec = gameSpacingInMin * 60;
-
-			games.forEach(game => {
-				currentTS += spacingInSec;
-				game.kickoff = `${currentTS}`;
-			});
-		}
-
-		json.W = w;
-		exporter.push(json);
-		console.log(`Week ${w} fetched`);
-	}
-
-	console.log('All weeks fetched!');
-	yearObj.export = exporter;
-	jsonfile.writeFileSync(file, yearObj);
-};
-
 const getDB = async function getDB (doDownload, { gameSpacingInMin = 0, year = new Date().getFullYear() } = {}) {
-  let gameObj = jsonfile.readFileSync(file, { throws: false });
+	let gameObj = jsonfile.readFileSync(file, { throws: false });
 
 	if (!doDownload) return gameObj;
 
@@ -100,6 +61,5 @@ const updateJSON = async function updateJSON ({ gameSpacingInMin = 0, year = new
 };
 
 module.exports = {
-	downloadJSON,
 	updateJSON
 };
