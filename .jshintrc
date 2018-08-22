@@ -1,9 +1,0 @@
-{
-  // Options
-  "esversion": 6,
-  // Environments
-  "browser": true,
-  "jquery": true,
-  "mocha": true,
-  "node": true
-}

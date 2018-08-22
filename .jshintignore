@@ -5,4 +5,4 @@ public
 .eslintrc
 .eslintignore
 dist
-**/*.jsx
+**/*.js

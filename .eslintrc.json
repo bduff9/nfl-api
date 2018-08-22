@@ -1,31 +1,21 @@
 {
   "env": {
-    "browser": true,
     "node": true,
     "es6": true
   },
   "extends": [
-    "eslint:recommended",
-    "plugin:react/recommended"
+    "eslint:recommended"
   ],
   "parser": "babel-eslint",
   "parserOptions": {
-    "ecmaFeatures": {
-      "experimentalObjectRestSpread": true,
-      "jsx": true
-    },
+    "ecmaFeatures": {},
     "ecmaVersion": 7,
     "sourceType": "module"
   },
   "plugins": [
-    "import",
-    "react"
+    "import"
   ],
-  "settings": {
-    "react": {
-      "version": "^16.0.0"
-    }
-  },
+  "settings": {},
   "rules": {
     "indent": [
       "error",
@@ -48,13 +38,10 @@
       "error",
       "single"
     ],
-    "react/no-danger": "off",
-    "react/no-find-dom-node": "off",
     "semi": [
       "error",
       "always"
     ],
-    "import/named": 2,
-    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }]
+    "import/named": 2
   }
 }
