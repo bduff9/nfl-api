@@ -1,9 +1,13 @@
 language: node_js
 node_js:
-  - "stable"
+- stable
 cache:
   directories:
   - node_modules
 script:
-  - npm run lint
-  - npm test
+- npm run lint
+- npm test
+notifications:
+  slack:
+    rooms:
+      secure: Ib18ric5WLhQEOc8VsdWYmghVDvYn0BJywBNFwGuNzPBtn/XOkBXZQv0OsUZkj5v6cMO7AQrHK+35EoSSOAlKqpxSWMsyybwuI3tCe/gI5TYaVnaTWsSd6giQCIu7K/OCz6Tif3FrFfQBeMcXlAEWudqXBGGjMMA8KZVRigDLZp3a3a+EmaKZfwh4b9MLf338eShMX7Hwm+J89Tz+cDv0lh39ZKvyGR2814EcWAuZ32z6kEgirsp2n8OrnaNrYXbWOa5s/8Ije4nHkFe1tKsIJJAYVzurKONoCfe9I0+vxzwthN6AYFfo3RftWNAFAbz1q6NhgVURNf6FvmGYlxQ0XGEVTy4dFmPoL50TVQcK4PLFBloujUqqbT8JZaX6vm6hx106Uo+BujDlMibUp1Qpl2RJECs76Jm42i4NCbezQZmJwEDYg17daoZI1Gp4Z+sehUoc3t9SegjQUtfGpQuS+GgaX6PTkJDdELd7e1hvRkYF8w4+yy6GZFbl1R0+3QuxNLxL7ju7JqR3z4Ux99dosxqn8mCebk+UVlTpjxo6CIsqeKJysMPuSS98lQQcEnTzkh/xnb3Hj8toDf6bkNdarHp9sxzhK/1zCnBYGPzZ3nrJRo2IjqfWnLk24MEsFxb+iXpK19R5HYAt+ULcXqAkfa3wF8H9JcaDQqy+W6islw=
