@@ -5,6 +5,7 @@ const server = jsonServer.create();
 const router = jsonServer.router('db.json');
 const middlewares = jsonServer.defaults();
 
+const { DB_FILE } = require('../constants');
 const { updateJSON } = require('../update/update');
 
 /**
@@ -15,7 +16,7 @@ server.all('/:year/export', async function ({ params }, UUresponse, next) {
 	const { year } = params;
 
 	await updateJSON({ year });
-	router.db.assign(require('require-uncached')('./db.json')).write();
+	router.db.assign(require('require-uncached')(DB_FILE)).write();
 	next();
 });
 
