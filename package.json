@@ -10,6 +10,7 @@
   "scripts": {
     "lint": "eslint \"./*.js\"",
     "server": "node ./server/server",
+    "start": "npm run server",
     "test": "jest --coverage --coverageReporters=text-lcov | coveralls"
   },
   "keywords": [],
@@ -24,9 +25,9 @@
     "require-uncached": "1.0.3"
   },
   "devDependencies": {
-    "ajv": "^6.5.3",
+    "ajv": "6.5.3",
     "babel-eslint": "8.2.6",
-    "coveralls": "^3.0.2",
+    "coveralls": "3.0.2",
     "eslint": "5.4.0",
     "eslint-plugin-import": "2.14.0",
     "jest": "23.5.0"
