@@ -10,6 +10,7 @@
   "scripts": {
     "lint": "eslint \"./*.js\"",
     "server": "node ./server/server",
+    "start": "npm run server",
     "test": "jest --coverage --coverageReporters=text-lcov | coveralls"
   },
   "keywords": [],
