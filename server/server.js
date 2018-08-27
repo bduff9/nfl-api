@@ -16,7 +16,7 @@ server.all('/:year/export', async function ({ params }, UUresponse, next) {
 	const { year } = params;
 
 	await updateJSON({ year });
-	router.db.assign(require('require-uncached')(DB_FILE)).write();
+	router.db.assign(require('require-uncached')(`../${DB_FILE}`)).write();
 	next();
 });
 

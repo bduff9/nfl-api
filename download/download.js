@@ -41,7 +41,7 @@ const downloadJSON = async function downloadJSON ({ kickoffs: gameSpacingInMin =
 
 	console.log('All weeks fetched!');
 	yearObj.export = exporter;
-	jsonfile.writeFileSync(DB_FILE, yearObj);
+	jsonfile.writeFileSync(`./${DB_FILE}`, yearObj);
 };
 
 module.exports = {

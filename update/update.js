@@ -11,14 +11,14 @@ const { downloadJSON, getNowInSeconds } = require('../download/download');
  * Only downloads data if db is empty
  */
 const getDB = async function getDB (doDownload, { gameSpacingInMin = 0, year = new Date().getFullYear() } = {}) {
-	let gameObj = jsonfile.readFileSync(DB_FILE, { throws: false });
+	let gameObj = jsonfile.readFileSync(`./${DB_FILE}`, { throws: false });
 
 	if (!doDownload) return gameObj;
 
 	if (gameObj == null || gameObj.metadata == null || gameObj.metadata.year != year) {
 		await downloadJSON({ kickoffs: gameSpacingInMin, year });
 
-		gameObj = jsonfile.readFileSync(DB_FILE, { throws: false });
+		gameObj = jsonfile.readFileSync(`./${DB_FILE}`, { throws: false });
 	} else {
 		console.log('Year already up to date!');
 	}
@@ -47,7 +47,7 @@ const updateJSON = async function updateJSON ({ kickoffs: gameSpacingInMin = 0, 
 
 	if (hasUpdated) {
 		gameObj.metadata.dateUpdated = new Date();
-		jsonfile.writeFileSync(DB_FILE, gameObj);
+		jsonfile.writeFileSync(`./${DB_FILE}`, gameObj);
 		console.log('Date has been updated!');
 	} else {
 		console.log('Data is already updated!');

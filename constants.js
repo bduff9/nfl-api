@@ -1,4 +1,4 @@
-const DB_FILE = '../db.json';
+const DB_FILE = 'db.json';
 
 const BETWEEN_GAMES_MIN = 60;
 
