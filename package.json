@@ -27,7 +27,7 @@
   "devDependencies": {
     "ajv": "6.5.3",
     "babel-eslint": "9.0.0",
-    "coveralls": "3.0.2",
+    "coveralls": "3.0.6",
     "eslint": "5.6.0",
     "eslint-plugin-import": "2.14.0",
     "jest": "23.6.0"
