@@ -1,10 +1,11 @@
 #!/usr/bin/env node
 'use strict';
 
-const program = require('commander');
+const commander = require('commander');
+const program = new commander.Command();
 
-const { downloadJSON } = require('./download/download');
-const { updateJSON } = require('./update/update');
+const { downloadJSON } = require('../download/download');
+const { updateJSON } = require('../update/update');
 
 /**
  * CLI functionality
@@ -18,7 +19,7 @@ const fullUpdate = async function fullUpdate ({ parent }) {
 };
 
 program
-	.version('0.0.1')
+	.version('0.0.2')
 	.option('-k, --kickoffs [minutes]', 'Separate kickoffs manually (in minutes)', /^\d+$/)
 	.option('-y, --year [year]', 'Year to get', /^\d\d\d\d$/);
 
@@ -31,5 +32,11 @@ program
 	.command('update')
 	.description('Manually update NFL API')
 	.action(fullUpdate);
+
+// Assert that a VALID command is provided
+if (!process.argv.slice(2).length || !/(download|update)/.test(process.argv[2])) {
+	program.outputHelp();
+	process.exit();
+}
 
 program.parse(process.argv);

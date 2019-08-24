@@ -8,3 +8,9 @@
 
 Author: Brian Duffey
 Description: Testing API for nfl-meteor
+
+## Running
+
+- Install all dependencies with `npm run setup`
+- Install app globally with `npm i -g ./`
+- Execute commands with `nfl-api [CMD] [OPTS]`

@@ -12,11 +12,11 @@ const { updateJSON } = require('../update/update');
  * Server file for json-server
  */
 server.use(middlewares);
-server.all('/:year/export', async function ({ params }, UUresponse, next) {
+server.all('/:year/export', async function ({ params }, _, next) {
 	const { year } = params;
 
 	await updateJSON({ year });
-	router.db.assign(require('require-uncached')(`../${DB_FILE}`)).write();
+	router.db.assign(require('import-fresh')(`../${DB_FILE}`)).write();
 	next();
 });
 
@@ -24,7 +24,7 @@ server.use(jsonServer.rewriter({
 	'/:year/export\\?*W=:week': '/export?W=:week'
 }));
 
-router.render = (UUrequest, response) => {
+router.render = (_, response) => {
 	const { data } = response.locals;
 
 	if (Array.isArray(data) && data.length === 1) return response.jsonp(data[0]);
