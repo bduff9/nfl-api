@@ -22,7 +22,7 @@
   "license": "ISC",
   "dependencies": {
     "commander": "3.0.0",
-    "json-server": "0.15.0",
+    "json-server": "0.16.2",
     "jsonfile": "5.0.0",
     "request": "2.88.0",
     "request-promise": "4.2.4",
